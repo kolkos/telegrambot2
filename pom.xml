@@ -4,11 +4,11 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>nl.kolkos.java</groupId>
-	<artifactId>nl.kolkos.telegrambot2</artifactId>
+	<artifactId>telegrambot2</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>jar</packaging>
 
-	<name>nl.kolkos.telegrambot2</name>
+	<name>telegrambot2</name>
 	<description>Telegram bot revisited</description>
 
 	<parent>
@@ -65,6 +65,20 @@
 			<artifactId>spring-security-test</artifactId>
 			<scope>test</scope>
 		</dependency>
+		
+		<!-- https://mvnrepository.com/artifact/net.sourceforge.nekohtml/nekohtml -->
+		<dependency>
+			<groupId>net.sourceforge.nekohtml</groupId>
+			<artifactId>nekohtml</artifactId>
+			<version>1.9.21</version><!--$NO-MVN-MAN-VER$ -->
+		</dependency>
+		
+		<!-- Telegram bot -->
+		<dependency>
+	        <groupId>org.telegram</groupId>
+	        <artifactId>telegrambots</artifactId>
+	        <version>4.0.1</version>
+	    </dependency>
 	</dependencies>
 
 	<build>

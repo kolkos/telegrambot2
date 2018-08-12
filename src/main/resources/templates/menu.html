@@ -1,0 +1,34 @@
+<!-- Image and text -->
+<nav class="navbar navbar-expand-lg navbar-light bg-light" xmlns:th="http://www.thymeleaf.org">
+  <a class="navbar-brand" href="#">
+    <img src="/images/tb2.png" width="30" height="30" class="d-inline-block align-top" alt="">
+    TelegramBot2
+  </a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  
+  <!--/* This will be displayed if no user is logged in */-->
+  <div class="collapse navbar-collapse" id="navbarNav" th:if="${loggedInUser == null}">
+    <ul class="navbar-nav">
+      <li class="nav-item">
+        <a class="nav-link" href="/registration">Register</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/login">Login</a>
+      </li>
+    </ul>
+  </div>
+  
+  <!--/* This will be displayed if a user is logged in */-->
+  <div class="collapse navbar-collapse" id="navbarNav" th:if="${loggedInUser != null}">
+    <ul class="navbar-nav">
+      <li class="nav-item">
+        <a class="nav-link" href="#">Home</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#">Bot</a>
+      </li>
+    </ul>
+  </div>
+</nav>
