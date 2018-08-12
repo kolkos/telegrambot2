@@ -75,10 +75,17 @@
 		
 		<!-- Telegram bot -->
 		<dependency>
+	      <groupId>org.telegram</groupId>
+	      <artifactId>telegrambots</artifactId>
+	      <version>4.0.1</version>
+	   </dependency>
+		<dependency>
 	        <groupId>org.telegram</groupId>
-	        <artifactId>telegrambots</artifactId>
+	        <artifactId>telegrambots-abilities</artifactId>
 	        <version>4.0.1</version>
 	    </dependency>
+	    
+	    
 	</dependencies>
 
 	<build>
