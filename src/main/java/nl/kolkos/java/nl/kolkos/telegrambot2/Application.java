@@ -10,6 +10,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
+import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 import org.springframework.scheduling.annotation.EnableScheduling;
 import org.telegram.telegrambots.ApiContextInitializer;
 import org.telegram.telegrambots.meta.TelegramBotsApi;
@@ -23,6 +24,7 @@ import nl.kolkos.java.nl.kolkos.telegrambot2.services.SettingService;
 
 @SpringBootApplication
 @EnableScheduling
+@EnableJpaAuditing
 public class Application {
 	@Autowired
 	private RoleService roleService;
@@ -79,6 +81,7 @@ public class Application {
 		List<Setting> settings = new ArrayList<>();
 		settings.add(new Setting("BOT_TOKEN", "348807800:AAGEcj83xpwlAhC69GC8mPj3byha3BwJ8-Y"));
 		settings.add(new Setting("BOT_USERNAME", "kolkos_ProbeerselBot"));
+		settings.add(new Setting("BOT_STOPPED", "False"));
 		
 		settingService.saveSettings(settings);
 	}

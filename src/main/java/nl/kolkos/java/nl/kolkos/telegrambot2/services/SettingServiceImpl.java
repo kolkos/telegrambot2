@@ -15,12 +15,19 @@ public class SettingServiceImpl implements SettingService{
 	
 	@Override
 	public void saveSetting(Setting setting) {
-		settingRepository.save(setting);
+		// check if setting exists
+		Setting existingSetting = settingRepository.findBySettingKey(setting.getSettingKey());
+		if(existingSetting == null) {
+			settingRepository.save(setting);
+		}
+		existingSetting = null;
 	}
 	
 	@Override
 	public void saveSettings(List<Setting> settings) {
-		settingRepository.saveAll(settings);
+		for(Setting setting : settings) {
+			this.saveSetting(setting);
+		}
 	}
 
 	@Override

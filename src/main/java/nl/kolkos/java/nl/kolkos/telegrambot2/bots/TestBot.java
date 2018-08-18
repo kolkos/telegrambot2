@@ -67,14 +67,14 @@ public class TestBot extends TelegramLongPollingBot {
 	    	// finally save the QueueEntry
 	    	queueEntryService.save(queueEntry);
 	    		    	
-    		SendMessage message = new SendMessage() // Create a SendMessage object with mandatory fields
-	                .setChatId(update.getMessage().getChatId())
-	                .setText(update.getMessage().getText());
-	        try {
-	            execute(message); // Call method to send the message
-	        } catch (TelegramApiException e) {
-	            e.printStackTrace();
-	        }
+//    		SendMessage message = new SendMessage() // Create a SendMessage object with mandatory fields
+//	                .setChatId(update.getMessage().getChatId())
+//	                .setText(update.getMessage().getText());
+//	        try {
+//	            execute(message); // Call method to send the message
+//	        } catch (TelegramApiException e) {
+//	            e.printStackTrace();
+//	        }
 
 	    }
     }

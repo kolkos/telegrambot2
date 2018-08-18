@@ -1,5 +1,7 @@
 package nl.kolkos.java.nl.kolkos.telegrambot2.services;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -16,6 +18,21 @@ public class QueueEntryServiceImpl implements QueueEntryService{
 	public void save(QueueEntry queueEntry) {
 		queueEntryRepository.save(queueEntry);
 		
+	}
+
+	@Override
+	public List<QueueEntry> findUnhandledEntries() {
+		return queueEntryRepository.findByHandledFalseOrderByCreatedDesc();
+	}
+
+	@Override
+	public void delete(QueueEntry queueEntry) {
+		queueEntryRepository.delete(queueEntry);
+	}
+
+	@Override
+	public List<QueueEntry> findHandledEntries() {
+		return queueEntryRepository.findByHandledTrueOrderByUpdatedAsc();
 	}
 	
 }

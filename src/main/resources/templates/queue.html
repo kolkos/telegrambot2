@@ -19,9 +19,17 @@
 <body>
 	<div id="menuHolder"></div>
 	
-	<div class="container" style="width: 40%;">
-		<h1>Hello!</h1>
+	<div class="container">
+		<h1 th:text="${title}">Queue contents</h1>
 		
+		<p>
+			<button type="button" class="btn btn-primary" id="refreshPage">Refresh</button>
+			<button type="button" class="btn btn-danger" th:if="${botStopped == 'False'}" id="stopBot">Stop bot</button>
+			<button type="button" class="btn btn-success" th:unless="${botStopped == 'False'}" id="startBot">Start bot</button>
+		</p>
+		
+		<div id="botActionStatus"></div>
+		<div id="queueContentHolder"></div>
 	</div>
 
 
@@ -41,5 +49,24 @@
 		
 	<script type="text/javascript" src="/js/jquery-3.3.1.min.js"></script>
 	<script type="text/javascript" src="/js/menu.js" ></script>
+	
+	<script>
+		function getQueueContents(){
+			$.get("/bot/queue/results", function(data) {
+				$("#queueContentHolder").html(data);
+			});
+		}
+		
+		
+		
+		$('#refreshPage').click(function(){
+			getQueueContents();		
+		});
+	
+		$(function() {
+			getQueueContents();
+		});
+	</script>
+	
 </body>
 </html>
