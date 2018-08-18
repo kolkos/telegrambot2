@@ -10,6 +10,7 @@ import nl.kolkos.java.nl.kolkos.telegrambot2.objects.QueueEntry;
 @Repository
 public interface QueueEntryRepository extends JpaRepository<QueueEntry, Long>{
 	List<QueueEntry> findByHandledFalseOrderByCreatedDesc();
+	List<QueueEntry> findByHandledFalseOrderByCreatedAsc();
 	List<QueueEntry> findByHandledTrueOrderByUpdatedAsc();
 	
 }

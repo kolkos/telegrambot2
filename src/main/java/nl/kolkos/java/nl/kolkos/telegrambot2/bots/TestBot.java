@@ -112,7 +112,7 @@ public class TestBot extends TelegramLongPollingBot {
     	boolean isCommand = false;
     	
     	String message = update.getMessage().getText();
-    	if(message.matches("^\\/\\w{1,}")) {
+    	if(message.matches("^\\/.*$")) {
     		isCommand = true;
     	}
     	

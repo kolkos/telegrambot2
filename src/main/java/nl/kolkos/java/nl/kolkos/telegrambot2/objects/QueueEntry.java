@@ -117,4 +117,16 @@ public class QueueEntry {
     protected void onUpdate() {
 		this.updated = new Date();
     }
+	
+//	private long id;
+//	private Date created;
+//	private Date updated;
+//	private long chatId;
+//	private int messageId;
+//	private String messageText;
+//	private boolean handled = false;
+	
+	public String toString() {
+		return String.format("id: %d, created: %s, updated: %s, chatId: %d, messageId: %d, messageText: %s, handled: %s", this.id, this.created, this.updated, this.chatId, this.messageId, this.messageText, this.handled);
+	}
 }

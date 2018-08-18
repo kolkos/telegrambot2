@@ -21,8 +21,13 @@ public class QueueEntryServiceImpl implements QueueEntryService{
 	}
 
 	@Override
-	public List<QueueEntry> findUnhandledEntries() {
+	public List<QueueEntry> findUnhandledEntriesNewToOld() {
 		return queueEntryRepository.findByHandledFalseOrderByCreatedDesc();
+	}
+	
+	@Override
+	public List<QueueEntry> findUnhandledEntriesOldToNew() {
+		return queueEntryRepository.findByHandledFalseOrderByCreatedAsc();
 	}
 
 	@Override
@@ -34,5 +39,7 @@ public class QueueEntryServiceImpl implements QueueEntryService{
 	public List<QueueEntry> findHandledEntries() {
 		return queueEntryRepository.findByHandledTrueOrderByUpdatedAsc();
 	}
+
+	
 	
 }

@@ -24,8 +24,8 @@
 		
 		<p>
 			<button type="button" class="btn btn-primary" id="refreshPage">Refresh</button>
-			<button type="button" class="btn btn-danger" th:if="${botStopped == 'False'}" id="stopBot">Stop bot</button>
-			<button type="button" class="btn btn-success" th:unless="${botStopped == 'False'}" id="startBot">Start bot</button>
+			<button type="button" class="btn btn-danger" id="stopBot">Stop bot</button>
+			<button type="button" class="btn btn-success" id="startBot">Start bot</button>
 		</p>
 		
 		<div id="botActionStatus"></div>
@@ -57,10 +57,20 @@
 			});
 		}
 		
-		
-		
 		$('#refreshPage').click(function(){
 			getQueueContents();		
+		});
+		
+		$('#stopBot').click(function(){
+			$.get("/bot/action/stop", function(data) {
+				$("#botActionStatus").html(data);
+			});
+		});
+		
+		$('#startBot').click(function(){
+			$.get("/bot/action/start", function(data) {
+				$("#botActionStatus").html(data);
+			});
 		});
 	
 		$(function() {

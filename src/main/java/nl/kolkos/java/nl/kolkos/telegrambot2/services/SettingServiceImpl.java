@@ -15,12 +15,8 @@ public class SettingServiceImpl implements SettingService{
 	
 	@Override
 	public void saveSetting(Setting setting) {
-		// check if setting exists
-		Setting existingSetting = settingRepository.findBySettingKey(setting.getSettingKey());
-		if(existingSetting == null) {
-			settingRepository.save(setting);
-		}
-		existingSetting = null;
+		settingRepository.save(setting);
+
 	}
 	
 	@Override
