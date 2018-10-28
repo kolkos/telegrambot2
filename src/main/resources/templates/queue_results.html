@@ -15,12 +15,12 @@
   <tbody>
     <tr th:each="queueEntry : ${queueEntries}">
       <th scope="row" th:text="${queueEntry.id}">QueueEntry ID</th>
-      <td th:text="${#dates.format(queueEntry.created, 'yyyy-MM-dd hh:mm:ss')}">Created</td>
+      <td th:text="${#dates.format(queueEntry.created, 'yyyy-MM-dd HH:mm:ss')}">Created</td>
       <td th:text="${queueEntry.messageId}">Message ID</td>
       <td th:text="${queueEntry.chatId}">Chat ID</td>
       <td th:text="${queueEntry.messageText}">Message</td>
       <td th:text="${queueEntry.telegramUser.userName}">Username</td>
-      <td th:text="${#dates.format(queueEntry.updated, 'yyyy-MM-dd hh:mm:ss')}">Created</td>
+      <td th:text="${#dates.format(queueEntry.updated, 'yyyy-MM-dd HH:mm:ss')}">Created</td>
       <td th:text="${queueEntry.handled}">Handled?</td>
       
       <td>Delete</td>

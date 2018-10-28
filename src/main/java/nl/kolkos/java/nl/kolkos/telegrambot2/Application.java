@@ -16,7 +16,7 @@ import org.telegram.telegrambots.ApiContextInitializer;
 import org.telegram.telegrambots.meta.TelegramBotsApi;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 
-import nl.kolkos.java.nl.kolkos.telegrambot2.bots.TestBot;
+import nl.kolkos.java.nl.kolkos.telegrambot2.bots.TelegramBot;
 import nl.kolkos.java.nl.kolkos.telegrambot2.objects.Role;
 import nl.kolkos.java.nl.kolkos.telegrambot2.objects.Setting;
 import nl.kolkos.java.nl.kolkos.telegrambot2.services.RoleService;
@@ -56,7 +56,7 @@ public class Application {
         
     }
 	
-	
+		
 	public void createRoles() {
 		List<String> neededRoles = new ArrayList<>();
 		neededRoles.add("ADMIN");
@@ -79,13 +79,34 @@ public class Application {
 		// TODO: Remove the settings here, use a setup for first run or whatever
 		
 		List<Setting> settings = new ArrayList<>();
-		settings.add(new Setting("BOT_TOKEN", "348807800:AAGEcj83xpwlAhC69GC8mPj3byha3BwJ8-Y"));
-		settings.add(new Setting("BOT_USERNAME", "kolkos_ProbeerselBot"));
+		settings.add(new Setting("BOT_TOKEN", "xxxxxxxx"));
+		settings.add(new Setting("BOT_USERNAME", "xxxxx"));
 		settings.add(new Setting("BOT_STOPPED", "False"));
 		
 		settingService.saveSettings(settings);
 	}
 	
+	@Bean
+    public CommandLineRunner startBot() {
+        return args -> {
+        	ApiContextInitializer.init();
+        	
+        	// Create the TelegramBotsApi object to register your bots
+            TelegramBotsApi botsApi = new TelegramBotsApi();
+            
+            Setting token = settingService.findBySettingKey("BOT_TOKEN");
+            Setting username = settingService.findBySettingKey("BOT_USERNAME");
+            
+            try {
+            	// Register your newly created AbilityBot
+            	botsApi.registerBot(new TelegramBot(token.getSettingValue(), username.getSettingValue()));
+            } catch (TelegramApiException e) {
+            	e.printStackTrace();
+            }
+        };
+        
+        
+    }
 	
 
 }
