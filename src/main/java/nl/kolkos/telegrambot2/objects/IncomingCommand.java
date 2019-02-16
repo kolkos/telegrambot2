@@ -1,9 +1,5 @@
-package nl.kolkos.telegrambot2.telegram.objects;
+package nl.kolkos.telegrambot2.objects;
 
-import java.util.Date;
-
-import org.json.JSONObject;
-import org.telegram.abilitybots.api.objects.MessageContext;
 import org.telegram.telegrambots.meta.api.objects.Update;
 
 public class IncomingCommand {
@@ -16,31 +12,28 @@ public class IncomingCommand {
 	private String text;
 	private String[] arguments;
 	
-	public IncomingCommand(MessageContext ctx) {
-		this.setTelegramUser(new TelegramUser(ctx));
-		this.setTelegramChat(new TelegramChat(ctx));
-		
-		this.setUpdateId(ctx.update().getUpdateId());
-		this.setMessageId(ctx.update().getMessage().getMessageId());
-		this.setDate(ctx.update().getMessage().getDate());
-		this.setText(ctx.update().getMessage().getText());
-		this.setArguments(ctx.arguments());
-	}
 	
-	public IncomingCommand(Update upd) {
+	public IncomingCommand(Update update) {
+		// first the user stuff
+		long userId = update.getMessage().getFrom().getId();
+		String userName = update.getMessage().getFrom().getUserName();
+		String firstName = update.getMessage().getFrom().getFirstName();
+		String lastName = update.getMessage().getFrom().getLastName();
+		String languageCode = update.getMessage().getFrom().getLanguageCode();
+		boolean bot = update.getMessage().getFrom().getBot();
 		
+		// create TelegramUser object
+		TelegramUser telegramUser = new TelegramUser(userId, userName, firstName, lastName, languageCode, bot);
 		
+		// the chat stuff
+		long chatId = update.getMessage().getChatId();
+		String chatTitle = update.getMessage().getChat().getTitle();
+		String chatType = update.getMessage().getChat().getDescription();
 		
-		this.setUpdateId(upd.getUpdateId());
-		this.setMessageId(upd.getMessage().getMessageId());
-		this.setDate(upd.getMessage().getDate());
-		this.setText(upd.getMessage().getText());
+		// create the chat object
+		TelegramChat telegramChat = new TelegramChat(chatId, chatType, chatTitle);
 		
-	}
-	
-	public IncomingCommand(JSONObject json) {
-				
-		// TODO: JSON to objects
+		// finally create the incoming command object
 		
 	}
 	
@@ -87,8 +80,6 @@ public class IncomingCommand {
 	public void setArguments(String[] arguments) {
 		this.arguments = arguments;
 	}
-	
-	
 	
 	
 }

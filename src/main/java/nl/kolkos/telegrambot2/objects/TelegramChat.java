@@ -1,19 +1,16 @@
-package nl.kolkos.telegrambot2.telegram.objects;
-
-import org.telegram.abilitybots.api.objects.MessageContext;
+package nl.kolkos.telegrambot2.objects;
 
 public class TelegramChat {
 	private long chatId;
 	private String chatType;
 	private String chatTitle;
 	
-	
-	public TelegramChat(MessageContext ctx) {
-		this.setChatId(ctx.update().getMessage().getChat().getId());
-		this.setChatType(ctx.update().getMessage().getChat().isGroupChat() ? "GROUP" : "PRIVATE");
-		this.setChatTitle(ctx.update().getMessage().getChat().isGroupChat() ? ctx.update().getMessage().getChat().getTitle() : ctx.update().getMessage().getChat().getUserName());
+	public TelegramChat() {}
+	public TelegramChat(long chatId, String chatType, String chatTitle) {
+		this.setChatId(chatId);
+		this.setChatType(chatType);
+		this.setChatTitle(chatTitle);
 	}
-	
 	
 	public long getChatId() {
 		return chatId;
