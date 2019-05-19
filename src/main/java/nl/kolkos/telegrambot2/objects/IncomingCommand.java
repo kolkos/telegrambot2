@@ -24,6 +24,7 @@ public class IncomingCommand {
 		
 		// create TelegramUser object
 		TelegramUser telegramUser = new TelegramUser(userId, userName, firstName, lastName, languageCode, bot);
+		this.setTelegramUser(telegramUser);
 		
 		// the chat stuff
 		long chatId = update.getMessage().getChatId();
@@ -32,8 +33,15 @@ public class IncomingCommand {
 		
 		// create the chat object
 		TelegramChat telegramChat = new TelegramChat(chatId, chatType, chatTitle);
+		this.setTelegramChat(telegramChat);
 		
 		// finally create the incoming command object
+		this.setUpdateId(update.getUpdateId());
+		this.setMessageId(update.getMessage().getMessageId());
+		this.setDate(update.getMessage().getDate());
+		this.setText(update.getMessage().getText());
+//		this.setArguments(update.getMessage().getText());
+		
 		
 	}
 	
