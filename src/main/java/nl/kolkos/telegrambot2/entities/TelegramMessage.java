@@ -2,6 +2,7 @@ package nl.kolkos.telegrambot2.entities;
 
 import java.util.Date;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -12,9 +13,11 @@ import javax.persistence.ManyToOne;
 import org.telegram.telegrambots.meta.api.objects.Update;
 
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Entity
 @Data
+@NoArgsConstructor
 public class TelegramMessage {
 	@Id
 	@GeneratedValue
@@ -27,11 +30,11 @@ public class TelegramMessage {
 	private Date date;
 	private String text;
 	
-	@ManyToOne(fetch=FetchType.EAGER)
+	@ManyToOne(fetch=FetchType.EAGER, cascade = CascadeType.ALL)
 	@JoinColumn(name="telegram_user_id")
 	private TelegramUser telegramUser;
 	
-	@ManyToOne(fetch=FetchType.EAGER)
+	@ManyToOne(fetch=FetchType.EAGER, cascade = CascadeType.ALL)
 	@JoinColumn(name="telegram_chat_id")
 	private TelegramChat telegramChat;
 	

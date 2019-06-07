@@ -6,9 +6,11 @@ import javax.persistence.Id;
 import org.telegram.telegrambots.meta.api.objects.Update;
 
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Entity
 @Data
+@NoArgsConstructor
 public class TelegramUser {
 	
 	@Id
@@ -25,6 +27,7 @@ public class TelegramUser {
 		this.id = update.getMessage().getFrom().getId();
 		this.firstName = update.getMessage().getFrom().getFirstName();
 		this.lastName = update.getMessage().getFrom().getLastName();
+		this.username = update.getMessage().getFrom().getUserName();
 		this.languageCode = update.getMessage().getFrom().getLanguageCode();
 	}
 	

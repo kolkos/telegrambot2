@@ -6,9 +6,11 @@ import javax.persistence.Id;
 import org.telegram.telegrambots.meta.api.objects.Update;
 
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Entity
 @Data
+@NoArgsConstructor
 public class TelegramChat {
 	@Id
 	private long id;
