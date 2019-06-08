@@ -12,12 +12,16 @@ import nl.kolkos.telegrambot2.repositories.TelegramMessageRepository;
 public class TelegramMessageService {
 
 	private final TelegramMessageRepository telegramMessageRepository;
+	private final TelegramChatService telegramChatService;
+	private final TelegramUserService telegramUserService;
 
 	@Autowired
-	public TelegramMessageService(TelegramMessageRepository telegramMessageRepository) {
+	public TelegramMessageService(TelegramMessageRepository telegramMessageRepository, TelegramChatService telegramChatService, TelegramUserService telegramUserService) {
 		this.telegramMessageRepository = telegramMessageRepository;
+		this.telegramChatService = telegramChatService;
+		this.telegramUserService = telegramUserService;
 	}
-	
+
 	public TelegramMessage save(TelegramMessage telegramMessage) {
 		return telegramMessageRepository.save(telegramMessage);
 	}

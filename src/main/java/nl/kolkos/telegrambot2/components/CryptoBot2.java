@@ -1,9 +1,12 @@
 package nl.kolkos.telegrambot2.components;
 
+import nl.kolkos.telegrambot2.services.IncomingMessageService;
+import nl.kolkos.telegrambot2.services.SendMessageToRabbitMQService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.telegram.telegrambots.bots.DefaultBotOptions;
 import org.telegram.telegrambots.bots.TelegramLongPollingBot;
 import org.telegram.telegrambots.meta.api.objects.Update;
 
@@ -21,39 +24,27 @@ public class CryptoBot2 extends TelegramLongPollingBot {
 	
 	private static final Logger LOGGER = LoggerFactory.getLogger(CryptoBot2.class);
 	private final TelegramConfiguration telegramConfiguration;
-	private final TelegramMessageService telegramMessageService;
-	
+	private final IncomingMessageService incomingMessageService;
+	private final SendMessageToRabbitMQService sendMessageToRabbitMQService;
+
+
 	@Autowired
-	public CryptoBot2(TelegramConfiguration telegramConfiguration, TelegramMessageService telegramMessageService) {
+	public CryptoBot2(TelegramConfiguration telegramConfiguration, IncomingMessageService incomingMessageService, SendMessageToRabbitMQService sendMessageToRabbitMQService) {
 		this.telegramConfiguration = telegramConfiguration;
-		this.telegramMessageService = telegramMessageService;
+		this.incomingMessageService = incomingMessageService;
+		this.sendMessageToRabbitMQService = sendMessageToRabbitMQService;
 	}
+
 
 	@Override
 	public void onUpdateReceived(Update update) {
-		ObjectMapper objectMapper = new ObjectMapper();
-		objectMapper.enable(SerializationFeature.INDENT_OUTPUT);
-		
+		TelegramMessage telegramMessage = incomingMessageService.registerIncomingMessage(update);
 		try {
-			String json = objectMapper.writeValueAsString(update);
-			LOGGER.info(json);
+			sendMessageToRabbitMQService.sendMessageToQueue(telegramMessage);
 		} catch (JsonProcessingException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
-		TelegramMessage telegramMessage = new TelegramMessage(update);
-		
-		try {
-			String json = objectMapper.writeValueAsString(telegramMessage);
-			LOGGER.info(json);
-		} catch (JsonProcessingException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
-		telegramMessageService.save(telegramMessage);
-		
+
 	}
 
 	@Override

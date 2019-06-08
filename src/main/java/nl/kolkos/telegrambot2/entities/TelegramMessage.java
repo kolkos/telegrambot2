@@ -29,19 +29,18 @@ public class TelegramMessage {
 	private long messageId;
 	private Date date;
 	private String text;
+
+	private int status = 0;
 	
-	@ManyToOne(fetch=FetchType.EAGER, cascade = CascadeType.ALL)
+	@ManyToOne(fetch=FetchType.EAGER)
 	@JoinColumn(name="telegram_user_id")
 	private TelegramUser telegramUser;
 	
-	@ManyToOne(fetch=FetchType.EAGER, cascade = CascadeType.ALL)
+	@ManyToOne(fetch=FetchType.EAGER)
 	@JoinColumn(name="telegram_chat_id")
 	private TelegramChat telegramChat;
 	
 	public TelegramMessage(Update update) {
-		this.telegramChat = new TelegramChat(update);
-		this.telegramUser = new TelegramUser(update);
-		
 		this.command = update.getMessage().isCommand();
 		this.reply = update.getMessage().isReply();
 		
