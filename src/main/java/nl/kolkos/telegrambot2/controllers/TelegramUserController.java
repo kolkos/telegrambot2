@@ -25,6 +25,6 @@ public class TelegramUserController {
 
 	@GetMapping("/list")
 	public List<TelegramUser> getAllUsers() {
-		return telegramUserService.getAll();
+		return telegramUserService.findAll();
 	}
 }

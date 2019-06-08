@@ -25,7 +25,7 @@ public class TelegramChatController {
 
 	@GetMapping("/list")
 	public List<TelegramChat> getAllChats(){
-		return telegramChatService.getAll();
+		return telegramChatService.findAll();
 	}
 	
 }
